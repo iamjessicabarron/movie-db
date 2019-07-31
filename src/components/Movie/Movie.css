@@ -1,13 +1,14 @@
 .movie {
   position: relative;
+  padding: 16px;
+  overflow: hidden;
+  width: min-content;
 }
 
 .movie .title {
   font-size: 14px;
   line-height: 16px;
   /* identical to box height, or 114% */
-
-
   color: #E6F7FF;
 }
 
@@ -23,9 +24,24 @@
 .movie .rating {
   font-weight: bold;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 20px;
   /* identical to box height, or 117% */
   text-align: center;
   color: #FFFFFF;
   position: absolute;
+  background-color: #4902A3;
+
+  width: 40px;
+  height: 20px;
+  margin: 8px 5px;
+  border-radius: 8px;
 }
+
+.movie .ratedWell {
+  background-color: #01D277;
+}
+
+.movie .ratedPoorly {
+  background-color: #D1225B
+}
+

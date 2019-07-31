@@ -5,6 +5,11 @@
   top: 0;
   background-color: #081B23;
   overflow: hidden;
+  display: none;
+}
+
+.movieDetails h2 {
+  margin-left: 0;
 }
 
 .movieDetails .container {
@@ -27,6 +32,7 @@
 
 .movieDetails .poster {
   margin-top: -74.79px;
+  border-radius: 10px;
 }
 
 .movieDetails .overview {

@@ -1,5 +1,5 @@
 .searchBox input {
-  width: 100%;
+  max-width: 1000px;
   box-sizing: border-box;
 
   height: 44px;
@@ -9,7 +9,11 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  
-  color: #01D277;
+
   padding-left: 22px;
+  margin: -22px 20px 44px 20px;
+}
+
+.searchBox input::placeholder {
+  color: #01D277;
 }
