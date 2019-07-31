@@ -2,8 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import MovieList from '../MovieList/MovieList'
+import MoviesList from '../MoviesList/MoviesList'
 import SearchBox from '../SearchBox/SearchBox'
+import MovieDetails from '../MovieDetails/MovieDetails'
+
 
 const App: React.FC = () => {
   return (
@@ -12,7 +14,9 @@ const App: React.FC = () => {
         The Movie Database
       </header>
       <SearchBox></SearchBox>
-      <MovieList></MovieList>
+      <h2>Popular Movies</h2>
+      <MoviesList></MoviesList>
+      <MovieDetails></MovieDetails>
     </div>
   );
 }

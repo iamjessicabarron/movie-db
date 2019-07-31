@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.title {
+.movie .title {
   font-size: 14px;
   line-height: 16px;
   /* identical to box height, or 114% */
@@ -11,7 +11,7 @@
   color: #E6F7FF;
 }
 
-.date {
+.movie .date {
   font-size: 12px;
   line-height: 14px;
   /* identical to box height, or 117% */
@@ -20,7 +20,7 @@
   color: #A1D1E6;
 }
 
-.rating {
+.movie .rating {
   font-weight: bold;
   font-size: 12px;
   line-height: 14px;
@@ -28,10 +28,4 @@
   text-align: center;
   color: #FFFFFF;
   position: absolute;
-}
-
-.poster {
-  width: 155px;
-  height: 233px;
-  background-color: blue;
 }

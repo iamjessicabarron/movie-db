@@ -1,11 +1,11 @@
 import React from 'react';
-import './MovieList.css';
+import './MoviesList.css';
 
 import Movie from '../Movie/Movie'
 
-const MovieList: React.FC = () => {
+const MoviesList: React.FC = () => {
   return(
-    <div className="movieList">
+    <div className="moviesList">
       <Movie></Movie>
       <Movie></Movie>
       <Movie></Movie>
@@ -17,4 +17,4 @@ const MovieList: React.FC = () => {
 
 }
 
-export default MovieList;
+export default MoviesList;
