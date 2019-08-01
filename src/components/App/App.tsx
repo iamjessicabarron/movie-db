@@ -7,45 +7,44 @@ import SearchBox from '../SearchBox/SearchBox'
 import MovieDetails from '../MovieDetails/MovieDetails'
 
 import MovieObject from '../../interfaces/MovieObject'
+import { getFromApi } from '../../helpers'
 
 const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   
   const [movies, setMovies] = useState(initial);
+  const [selectedMovie, setSelectedMovie] = useState<MovieObject | null>(null)
 
   useEffect(() => {
-    console.log("useEffect")
     getPopular()
   }, [])
 
-  const getPopular = () => {
-    let baseUrl = "http://api.themoviedb.org/3"
-    let apiKey = process.env.REACT_APP_API_KEY
-    let url = `${baseUrl}/trending/movie/week?api_key=${apiKey}`
-    let baseImageUrl = "https://image.tmdb.org/t/p/w500/"
+  const getMovie = (movie: MovieObject) => {
+    setSelectedMovie(movie)
+  }
 
-    fetch(url)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
+  const getPopular = () => {
+    let baseImageUrl = process.env.REACT_APP_API_IMAGE_URL
+
+    getFromApi(`/movie/popular`)
+      .then((data) => {
         let movieData: MovieObject[] = data.results.map( (item: any) => {
           let obj: MovieObject = {
             id: item.id,
             title: item.title,
             rating: item.vote_average,
             date: new Date(item.release_date),
-            posterUrl: `${baseImageUrl}${item.poster_path}`
+            posterUrl: `${baseImageUrl}${item.poster_path}`,
+            coverUrl: `${baseImageUrl}${item.backdrop_path}`,
+            overview: item.overview,
+            runtime: item.runtime
           }
-
-          console.log(item.poster_path)
-
           return obj
         })
 
         setMovies(movieData)
       })
       .catch(error => {
-        console.log("there was an error")
+        console.log("There was an getting movie runtime")
       })
   }
 
@@ -56,8 +55,8 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
       </header>
       <SearchBox></SearchBox>
       <h2>Popular Movies</h2>
-      <MoviesList data={movies}></MoviesList>
-      <MovieDetails></MovieDetails>
+      <MoviesList data={movies} onClick={ getMovie }></MoviesList>
+      <MovieDetails movie={selectedMovie} onBackClick={() => {setSelectedMovie(null)}}></MovieDetails>
     </div>
   );
 }

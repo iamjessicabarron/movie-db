@@ -5,13 +5,13 @@ import Movie from '../Movie/Movie'
 import MovieObject from '../../interfaces/MovieObject'
 
 type Props = {
-  data: MovieObject[]
+  data: MovieObject[],
+  onClick: (movie: MovieObject) => void
 }
 
 const MoviesList: React.FC<Props> = (props) => {
-
   let list = props.data.map(item => {
-    return(<Movie data={item}></Movie>)
+    return(<Movie key={item.id} onClick={props.onClick} data={item}></Movie>)
   })
   return(
     <div className="moviesList">

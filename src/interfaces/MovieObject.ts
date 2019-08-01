@@ -3,5 +3,8 @@ export default interface MovieObject {
   title: string,
   rating: number,
   date: Date,
-  posterUrl: string
+  posterUrl: string,
+  coverUrl: string,
+  overview: string,
+  runtime: number
 }

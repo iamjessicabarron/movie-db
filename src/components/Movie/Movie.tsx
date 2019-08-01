@@ -4,7 +4,8 @@ import './Movie.css';
 import MovieObject from '../../interfaces/MovieObject'
 
 type Props = {
-  data: MovieObject
+  data: MovieObject,
+  onClick: (movie: MovieObject) => void
 }
 const Movie: React.FC<Props> = (props) => {
 
@@ -12,7 +13,6 @@ const Movie: React.FC<Props> = (props) => {
   let month = movie.date.toLocaleString('default', { month: 'long' });
   let ratingCategory= () => {
     let rating = movie.rating / 10
-    console.log(rating)
     if (rating < 1/4) {
       return 'ratedPoorly'
     } else if (rating > (1/4*3)) {
@@ -23,7 +23,7 @@ const Movie: React.FC<Props> = (props) => {
   }
 
   return(
-    <div className="movie">
+    <div className="movie" onClick={ props.onClick.bind(null, movie) }>
       <div className={`rating ${ratingCategory()}`}>{`${movie.rating * 10}%`}</div>
       <div className="poster"><img src={movie.posterUrl}></img></div>
       <div className="title">{movie.title}</div>
