@@ -9,10 +9,15 @@ import MovieDetails from '../MovieDetails/MovieDetails'
 import MovieObject from '../../interfaces/MovieObject'
 import { getFromApi } from '../../helpers'
 
+import { MovieAdapter } from '../../adapters/index'
+
 const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   
+  const [pageIndex, setPageIndex] = useState(0)
   const [movies, setMovies] = useState(initial);
   const [selectedMovie, setSelectedMovie] = useState<MovieObject | null>(null)
+
+  const movieAdapter = new MovieAdapter()
 
   useEffect(() => {
     getPopular()
@@ -22,23 +27,31 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
     setSelectedMovie(movie)
   }
 
+  const getSearchResults = (str: string) => {
+    if (str.length > 0) {
+      let params = `&language=en-US&query=${str}&page=1`
+      getFromApi(`/search/movie`, params)
+        .then((data) => {
+          let movieData: MovieObject[] = data.results.map( (item: any) => {
+            return movieAdapter.adapt(item)
+          })
+          setSelectedMovie(null)
+          setMovies(movieData)
+        })
+    } else {
+      setPageIndex(0)
+      getPopular()
+    }
+  }
+
   const getPopular = () => {
     let baseImageUrl = process.env.REACT_APP_API_IMAGE_URL
 
-    getFromApi(`/movie/popular`)
+    getFromApi(`/movie/popular`, null)
       .then((data) => {
         let movieData: MovieObject[] = data.results.map( (item: any) => {
-          let obj: MovieObject = {
-            id: item.id,
-            title: item.title,
-            rating: item.vote_average,
-            date: new Date(item.release_date),
-            posterUrl: `${baseImageUrl}${item.poster_path}`,
-            coverUrl: `${baseImageUrl}${item.backdrop_path}`,
-            overview: item.overview,
-            runtime: item.runtime
-          }
-          return obj
+          let movieAdapter = new MovieAdapter()
+          return movieAdapter.adapt(item)
         })
 
         setMovies(movieData)
@@ -53,7 +66,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
       <header className="App-header">
         <h1>The Movie Database</h1>
       </header>
-      <SearchBox></SearchBox>
+      <SearchBox onSearch={getSearchResults}></SearchBox>
       <h2>Popular Movies</h2>
       <MoviesList data={movies} onClick={ getMovie }></MoviesList>
       <MovieDetails movie={selectedMovie} onBackClick={() => {setSelectedMovie(null)}}></MovieDetails>

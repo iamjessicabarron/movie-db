@@ -18,7 +18,7 @@ const MovieDetails: React.FC<Props> = (props) => {
     if (movie != null) {
       setRuntime(null)
 
-      getFromApi(`/movie/${movie.id}`)
+      getFromApi(`/movie/${movie.id}`, null)
         .then((data) => {
           setRuntime(data.runtime)
         })
