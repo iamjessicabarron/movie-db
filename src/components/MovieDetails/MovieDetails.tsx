@@ -42,13 +42,27 @@ const MovieDetails: React.FC<Props> = (props) => {
     runtimeValue = <span>{`${hours}h ${leftoverMinutes} min`}</span>
   }
 
+  const posterImg = () => {
+    if (movie !== null && movie.posterUrl !== null) {
+      return <img src={movie.posterUrl} alt=""></img>
+    }
+    return null
+  }
+
+  const coverImg = () => {
+    if (movie !== null && movie.coverUrl !== null) {
+      return <img src={movie.coverUrl} alt=""></img>
+    }
+    return null
+  }
+
   return(
     <div className={`movieDetails ${movieSelected}`}>
-      <div className="cover"><img src={movie.coverUrl}></img></div>
+      <div className="cover">{coverImg()}</div>
       <div className="container">
         <div className="backButton" onClick={props.onBackClick}>&#x2190;</div>
         <div className="header">
-        <div className="poster"><img src={movie.posterUrl}></img></div>
+        <div className="poster">{posterImg()}</div>
           <div className="information">
             <h1>{movie.title}</h1>
             <div>

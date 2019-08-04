@@ -12,10 +12,9 @@ export class MovieAdapter implements Adapter<MovieObject> {
       title: item.title,
       rating: item.vote_average,
       date: new Date(item.release_date),
-      posterUrl: `${baseImageUrl}${item.poster_path}`,
-      coverUrl: `${baseImageUrl}${item.backdrop_path}`,
+      posterUrl: item.poster_path !== null ? `${baseImageUrl}${item.poster_path}` : null,
+      coverUrl: item.backdrop_path !== null ? `${baseImageUrl}${item.backdrop_path}`: null,
       overview: item.overview,
-      runtime: item.runtime
     }
     return obj
   }
