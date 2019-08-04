@@ -2,30 +2,27 @@
   position: relative;
   padding: 16px;
   overflow: hidden;
-  width: min-content;
 }
 
 .movie .title {
   font-size: 14px;
   line-height: 16px;
-  /* identical to box height, or 114% */
   color: #E6F7FF;
+  margin-top: 12px;
+
 }
 
 .movie .date {
   font-size: 12px;
   line-height: 14px;
-  /* identical to box height, or 117% */
-
-
   color: #A1D1E6;
+  margin-top: 6px;
 }
 
 .movie .rating {
   font-weight: bold;
   font-size: 12px;
   line-height: 20px;
-  /* identical to box height, or 117% */
   text-align: center;
   color: #FFFFFF;
   position: absolute;

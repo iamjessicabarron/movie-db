@@ -1,6 +1,16 @@
 .moviesList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  box-sizing: border-box;
+  margin: 0
+}
+
+.moviesList.shrunk {
+  padding-left: 375px;
+}
+
+@media (min-width: 900px) {
+  .moviesList {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

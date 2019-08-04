@@ -69,6 +69,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   };
 
   const handleMovieSelection = (movie: MovieObject | null) => {
+    
     setSelectedMovie(movie)
   }
 
@@ -122,14 +123,21 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
     window.history.pushState(historyStateObj, "", `${trimmedTitle}`);
   }
 
+  const handleOpenDetailView = () => {
+    if (selectedMovie !== null) {
+      return "shrunk"
+    }
+    return ""
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>The Movie Database</h1>
+      <header className={ handleOpenDetailView() } >
+        <img className="logo" src={logo} alt="The Movie DB"></img>
       </header>
-      <SearchBox onSearch={handleSearchChange} value={searchValue}></SearchBox>
+      <SearchBox className={ handleOpenDetailView() }onSearch={handleSearchChange} value={searchValue}></SearchBox>
       <h2>Popular Movies</h2>
-      <MoviesList data={movies} onClick={ handleMovieSelection}></MoviesList>
+      <MoviesList data={ movies } onClick={ handleMovieSelection} className={ handleOpenDetailView() }></MoviesList>
       <MovieDetails movie={selectedMovie} onBackClick={() => { handleMovieSelection(null) }}></MovieDetails>
     </div>
   );

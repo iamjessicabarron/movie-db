@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MovieDetails.css';
+import arrow from './arrow.svg';
 import MovieObject from '../../interfaces/MovieObject';
 import { getFromApi } from '../../helpers';
 
@@ -60,7 +61,7 @@ const MovieDetails: React.FC<Props> = (props) => {
     <div className={`movieDetails ${movieSelected}`}>
       <div className="cover">{coverImg()}</div>
       <div className="container">
-        <div className="backButton" onClick={props.onBackClick}>&#x2190;</div>
+        <div className="backButton" onClick={props.onBackClick}><img src={arrow} alt="Return to all movies"></img></div>
         <div className="header">
         <div className="poster">{posterImg()}</div>
           <div className="information">
