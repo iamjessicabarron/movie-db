@@ -130,13 +130,21 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
     return ""
   }
 
+  const searchIsOpen = () => {
+    if (searchValue.length > 0) {
+      return "searchOpen"
+    } 
+
+    return ""
+  }
+
   return (
     <div className="App">
       <header className={ handleOpenDetailView() } >
         <img className="logo" src={logo} alt="The Movie DB"></img>
       </header>
       <SearchBox className={ handleOpenDetailView() }onSearch={handleSearchChange} value={searchValue}></SearchBox>
-      <h2 className={ handleOpenDetailView() }>Popular Movies</h2>
+      <h2 className={ `${handleOpenDetailView()} ${searchIsOpen()}` }>Popular Movies</h2>
       <MoviesList data={ movies } onClick={ handleMovieSelection} className={ handleOpenDetailView() }></MoviesList>
       <MovieDetails movie={selectedMovie} onBackClick={() => { handleMovieSelection(null) }}></MovieDetails>
     </div>

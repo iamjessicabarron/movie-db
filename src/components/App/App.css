@@ -16,7 +16,6 @@ html, body {
   margin: 60px 0 0 0;
   margin-left: calc(50% - 33px);
   transition: margin 1.2s ease;
-  /* transition-delay: 0.4s; */
 }
 
 header {
@@ -67,13 +66,20 @@ h2 {
   margin-left: 20px;
   margin-top: 0px;
   margin-bottom: 0px;
+  opacity: 1;
 
   transition: margin 0.8s ease;
+  transition: opacity 0.8s ease;
 }
 
 h2.shrunk {
   margin-left: 395px;
 }
+
+h2.searchOpen {
+  opacity: 0;
+}
+
 
 .poster {
   width: 100%;
