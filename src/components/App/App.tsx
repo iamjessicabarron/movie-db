@@ -136,7 +136,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
         <img className="logo" src={logo} alt="The Movie DB"></img>
       </header>
       <SearchBox className={ handleOpenDetailView() }onSearch={handleSearchChange} value={searchValue}></SearchBox>
-      <h2>Popular Movies</h2>
+      <h2 className={ handleOpenDetailView() }>Popular Movies</h2>
       <MoviesList data={ movies } onClick={ handleMovieSelection} className={ handleOpenDetailView() }></MoviesList>
       <MovieDetails movie={selectedMovie} onBackClick={() => { handleMovieSelection(null) }}></MovieDetails>
     </div>

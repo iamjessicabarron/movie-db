@@ -31,7 +31,7 @@ const MovieDetails: React.FC<Props> = (props) => {
 
 
   if (movie === null) {
-    return <div></div>
+    return <div className="movieDetails"></div>
   }
 
   let runtimeValue = <span>&middot;&middot;&middot;</span>;

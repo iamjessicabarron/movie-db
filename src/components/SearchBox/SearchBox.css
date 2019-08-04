@@ -1,6 +1,8 @@
 .searchBox {
   margin: -22px 20px 44px 20px;
   position: relative;
+
+  transition: padding 0.8s ease;
 }
 
 .searchBox.shrunk {
