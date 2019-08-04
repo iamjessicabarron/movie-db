@@ -7,27 +7,73 @@ import SearchBox from '../SearchBox/SearchBox'
 import MovieDetails from '../MovieDetails/MovieDetails'
 
 import MovieObject from '../../interfaces/MovieObject'
-import { getFromApi } from '../../helpers'
+import WindowHistory from '../../interfaces/WindowHistory'
 
+import { getFromApi } from '../../helpers'
 import { MovieAdapter } from '../../adapters/index'
+
 
 const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   
   const [pageIndex, setPageIndex] = useState(0)
+  const [searchValue, setSearchValue] = useState("")
   const [movies, setMovies] = useState(initial);
   const [selectedMovie, setSelectedMovie] = useState<MovieObject | null>(null)
 
   const movieAdapter = new MovieAdapter()
 
+  // on mount
   useEffect(() => {
     getPopular()
+    pushHistory()
   }, [])
 
-  const getMovie = (movie: MovieObject) => {
+  // selected movie
+  useEffect(() => {
+    let history : WindowHistory = window.history.state
+    if (history == null) { 
+      return
+    }
+
+    const oldStateIsNull = selectedMovie === null
+    const currentStateIsNull =  history.selectedMovie === null
+
+    if (selectedMovie !== null && history.selectedMovie !== null) {
+      if (history.selectedMovie.id !== selectedMovie.id) {
+        pushHistory()
+      }
+
+    } else if ( !(currentStateIsNull && oldStateIsNull) ) {
+      pushHistory()
+    }
+  }, [selectedMovie])
+
+  // search
+  useEffect(() => {
+    let history : WindowHistory = window.history.state
+    if (history == null) { 
+      return
+    }
+
+    if (searchValue != history.searchValue) {
+      pushHistory()
+    }
+  }, [searchValue])
+
+  window.onpopstate = (event) => {
+    let windowState : WindowHistory = event.state
+
+    setSelectedMovie(windowState.selectedMovie)
+    setMovies(windowState.movies)
+    handleSearchChange (windowState.searchValue)
+  };
+
+  const handleMovieSelection = (movie: MovieObject | null) => {
     setSelectedMovie(movie)
   }
 
-  const getSearchResults = (str: string) => {
+  const handleSearchChange = (str: string) => {
+    setSearchValue(str)
     if (str.length > 0) {
       let params = `&language=en-US&query=${str}&page=1`
       getFromApi(`/search/movie`, params)
@@ -61,15 +107,30 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
       })
   }
 
+  const pushHistory = () => {
+    console.log("push history", selectedMovie ? selectedMovie.title : "")
+
+    let historyStateObj = {
+      selectedMovie: selectedMovie,
+      movies: movies,
+      searchValue: searchValue
+    }
+
+    const trimmedTitleRegExp : RegExp = new RegExp(/[^\w\d]+/g)
+    let trimmedTitle = selectedMovie !== null ? selectedMovie.title.replace(trimmedTitleRegExp, "") : "null"
+
+    window.history.pushState(historyStateObj, "", `${trimmedTitle}`);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>The Movie Database</h1>
       </header>
-      <SearchBox onSearch={getSearchResults}></SearchBox>
+      <SearchBox onSearch={handleSearchChange} value={searchValue}></SearchBox>
       <h2>Popular Movies</h2>
-      <MoviesList data={movies} onClick={ getMovie }></MoviesList>
-      <MovieDetails movie={selectedMovie} onBackClick={() => {setSelectedMovie(null)}}></MovieDetails>
+      <MoviesList data={movies} onClick={ handleMovieSelection}></MoviesList>
+      <MovieDetails movie={selectedMovie} onBackClick={() => { handleMovieSelection(null) }}></MovieDetails>
     </div>
   );
 }
