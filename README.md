@@ -1,44 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Movie DB
+A React/TypeScript app for browsing popular movies and TV shows.
 
-## Available Scripts
+## Getting started
+Create a `.env.local` file with your MovieDB API key `REACT_APP_API_KEY=<your api key here>` 
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
+Use `npm start` to run the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
+## Notes on development
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I avoided using redux and react-router because it's such a small project
 
-### `npm run build`
+Had to choose how to handle search (used same, familiar pattern as Netflix). I'd improve it by adding some kind of delay logic, to only search when the user has finished typing
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I left alt tags for posters blank because they wouldn't provide any value - if the API returned a description of the poster, that would go in the alt tag.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+I opted not to use `search/multi` as it seemed to return inaccurate results (many Harry Potter movies were returned with a `media_type` of `"tv"` for example), but otherwise I would have preferred to make one, large request rather than two small ones
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For the sake of speed I added `transition: all` but I would not normally use `all`, and would fix this (or opt-out of having it at all until it can be done properly) 
 
-### `npm run eject`
+There is some repetition of code that I would ideally refactor, particularly in regards to populating `movies` and `tv` states, and displaying of these lists. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Potential design improvements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Having to scroll so much for TV shows could be frustrating, so could add a better method of navigating to there, or adding a 'display more' mechanism to hide 
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Having to scroll down to see TV search results is not ideal either, I'd either implement radio buttons up the top, near the search bar or show both results 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Also a potential fix for above, I would probably pin search to the top, or add some method of quicker access to search when you have scrolled further down
 
-## Learn More
+The design is lacking any indication of the media type besides the heading, so adding this would be desirable
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Small small design changes could be added where posters or backdrop/cover photos are null, to keep looks consistent - could potentially use a poster with some CSS effect as a backdrop (if available), and provide some kind of backup poster image (potentially multiple) 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## **Known issues**
+
+If overview is too long it will get cut off on smaller screens. I would add a scroll to fix this. 
+
+Posters quality will look degraded on large screens - would ideally show more than 3 pieces of media on the same row on larger screens, scaling with screen size
+
+Search will only show the first page of results, some mechanism (probably pagination, as lazy loading would prevent user from seeing TV results with current design) 
+
+The 'oh no I can't find anything' will appear on loading popular media (like when the app is still opened), it would be better to add some kind of loading state when this is not the case
+
+There is no UI for error handling
