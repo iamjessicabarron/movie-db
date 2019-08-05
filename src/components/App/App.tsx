@@ -151,7 +151,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
     }
 
     const trimmedTitleRegExp : RegExp = new RegExp(/[^\w\d]+/g)
-    let trimmedTitle = selectedMedia !== null ? selectedMedia.title.replace(trimmedTitleRegExp, "") : "null"
+    let trimmedTitle = selectedMedia !== null ? selectedMedia.title.replace(trimmedTitleRegExp, "") : ""
 
     window.history.pushState(historyStateObj, "", `${trimmedTitle}`);
   }

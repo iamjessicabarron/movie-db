@@ -11,6 +11,9 @@ let url = `${baseUrl}${path}?api_key=${apiKey}${paramsString}`
   .then(data => {
     return data
   })
+  .catch(err => {
+    console.log("There was a problem fetching", path, "at", baseUrl, "with params", params)
+  })
 }
 
 export { getFromApi }
