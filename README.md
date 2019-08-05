@@ -48,3 +48,5 @@ Search will only show the first page of results, some mechanism (probably pagina
 The 'oh no I can't find anything' will appear on loading popular media (like when the app is still opened), it would be better to add some kind of loading state when this is not the case
 
 There is no UI for error handling
+
+The movie title will persist in the URL until another movie is clicked, even when the details dialogue is closed
