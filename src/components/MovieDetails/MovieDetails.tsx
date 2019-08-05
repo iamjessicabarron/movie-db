@@ -24,7 +24,7 @@ const MovieDetails: React.FC<Props> = (props) => {
           setRuntime(data.runtime)
         })
         .catch(error => {
-          console.log("There was an getting movie runtime")
+          console.log("There was an error getting movie runtime")
         })
     } 
   }, [props.movie])

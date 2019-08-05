@@ -1,4 +1,7 @@
+import { MediaType } from './MediaType'
+
 export default interface MovieObject {
+  type: MediaType
   id: number,
   title: string,
   rating: number,
