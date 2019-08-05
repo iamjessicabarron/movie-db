@@ -12,7 +12,7 @@ const SearchBox: React.FC<Props> = (props) => {
   return(
     <div className={`searchBox ${props.className}`}>
       <input type="text" placeholder="Search" onChange={(event) => props.onSearch(event.target.value)} value={props.value}></input>
-      <img src={searchIcon}></img>
+      <img src={searchIcon} alt=""></img>
     </div>
   )
 
