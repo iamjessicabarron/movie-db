@@ -15,7 +15,6 @@ import { MediaType } from '../../interfaces/MediaType'
 
 const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   
-  const [pageIndex, setPageIndex] = useState(0)
   const [searchValue, setSearchValue] = useState("")
   const [movies, setMovies] = useState(initial);
   const [tv, setTV] = useState(initial);
@@ -57,7 +56,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
       return
     }
 
-    if (searchValue != history.searchValue) {
+    if (searchValue !== history.searchValue) {
       pushHistory()
     }
   }, [searchValue])
@@ -98,14 +97,11 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
           setSelectedMedia(null)
         })
     } else {
-      setPageIndex(0)
       getAllPopular()
     }
   }
 
   const getPopular = (type: MediaType) => {
-    let baseImageUrl = process.env.REACT_APP_API_IMAGE_URL
-
     getFromApi(`/${type}/popular`, null)
       .then((data) => {
 
@@ -142,8 +138,6 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   }
 
   const pushHistory = () => {
-    console.log("Push history", selectedMedia ? selectedMedia.title : "")
-
     let historyStateObj = {
       selectedMovie: selectedMedia,
       movies: movies,

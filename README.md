@@ -23,6 +23,8 @@ For the sake of speed I added `transition: all` but I would not normally use `al
 
 There is some repetition of code that I would ideally refactor, particularly in regards to populating `movies` and `tv` states, and displaying of these lists. 
 
+I didn't have time to address `React Hook useEffect has missing dependencies` error but this would be a priority.
+
 ## Potential design improvements
 
 Having to scroll so much for TV shows could be frustrating, so could add a better method of navigating to there, or adding a 'display more' mechanism to hide 
