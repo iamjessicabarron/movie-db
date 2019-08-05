@@ -14,9 +14,18 @@ const MoviesList: React.FC<Props> = (props) => {
   let list = props.data.map(item => {
     return(<Movie key={item.id} onClick={props.onClick} data={item}></Movie>)
   })
+
+  const listAlt = () => {
+      return (
+      <div className="searchFailure">
+        <h2>Oh no!</h2>
+        <h3>We can't find anything! Try changing your search terms.</h3>
+      </div>)
+  }
+
   return(
     <div className={`moviesList ${props.className}`}>
-      {list}
+      {props.data.length > 0 ? list : listAlt()}
     </div>
   )
 

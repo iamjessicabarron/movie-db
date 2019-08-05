@@ -48,16 +48,13 @@
   width: 100%;
   height: 244.79px;
   overflow: hidden;
-  background-color: black;
-}
-
-.movieDetails .cover img {
-  height: 100%;
+  background-color: rgb(6, 20, 26);
 }
 
 .movieDetails .poster {
   margin-top: -74.79px;
   border-radius: 10px;
+  width: 140px;
 }
 
 .movieDetails .overview {
@@ -98,9 +95,4 @@
   overflow: hidden;
   margin-left: 18px;
   width: 175px; /* FIXME: Make flexible */
-}
-
-.movieDetails .poster {
-  width: 140px;
-  height:  213px;
 }

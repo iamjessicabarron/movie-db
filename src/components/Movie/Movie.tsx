@@ -10,7 +10,7 @@ type Props = {
 const Movie: React.FC<Props> = (props) => {
 
   let movie = props.data
-  let month = movie.date.toLocaleString('default', { month: 'long' });
+  let month = movie.date !== null ? movie.date.toLocaleString('default', { month: 'long' }) : ""
   let ratingCategory = () => {
     let rating = movie.rating / 10
     if (rating < 1/4) {
@@ -34,7 +34,7 @@ const Movie: React.FC<Props> = (props) => {
       <div className={`rating ${ratingCategory()}`}>{`${movie.rating * 10}%`}</div>
       <div className="poster">{posterImg()}</div>
       <div className="title">{movie.title}</div>
-      <div className="date">{`${month} ${movie.date.getFullYear()}`}</div>
+      <div className="date">{`${month} ${movie.date !== null ? movie.date.getFullYear() : ""}`}</div>
     </div>
   )
 }

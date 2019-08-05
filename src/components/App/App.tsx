@@ -69,7 +69,6 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   };
 
   const handleMovieSelection = (movie: MovieObject | null) => {
-    
     setSelectedMovie(movie)
   }
 
@@ -82,6 +81,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
           let movieData: MovieObject[] = data.results.map( (item: any) => {
             return movieAdapter.adapt(item)
           })
+          
           setSelectedMovie(null)
           setMovies(movieData)
         })
@@ -109,7 +109,7 @@ const App: React.FC<{ initial?: MovieObject[] }> = ({ initial = [] }) => {
   }
 
   const pushHistory = () => {
-    console.log("push history", selectedMovie ? selectedMovie.title : "")
+    console.log("Push history", selectedMovie ? selectedMovie.title : "")
 
     let historyStateObj = {
       selectedMovie: selectedMovie,

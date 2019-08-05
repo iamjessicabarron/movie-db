@@ -34,7 +34,7 @@ const MovieDetails: React.FC<Props> = (props) => {
     return <div className="movieDetails"></div>
   }
 
-  let runtimeValue = <span>&middot;&middot;&middot;</span>;
+  let runtimeValue = <span></span>;
 
   if (runtime != null) {
     let hours = Math.floor(runtime / 60)
@@ -57,6 +57,25 @@ const MovieDetails: React.FC<Props> = (props) => {
     return null
   }
 
+  const showDateAndRating = () => {
+    if (movie !== null) {
+      if (movie.date !== null ) {
+        return(<div>
+          <h3 className="date">{`${movie.date !== null ? movie.date.getFullYear() : ""}`}</h3>
+          <h3>&middot;</h3>
+          <h3 className="rating">{`${movie.rating * 10}% User Score`}</h3>
+        </div>)
+      }
+
+      return(      
+        <div>
+          <h3 className="rating">{`${movie.rating * 10}% User Score`}</h3>
+        </div>)
+    }
+
+    return <div></div>
+  }
+
   return(
     <div className={`movieDetails ${movieSelected}`}>
       <div className="cover">{coverImg()}</div>
@@ -66,11 +85,7 @@ const MovieDetails: React.FC<Props> = (props) => {
         <div className="poster">{posterImg()}</div>
           <div className="information">
             <h1>{movie.title}</h1>
-            <div>
-              <h3 className="date">{movie.date.getFullYear()}</h3>
-              <h3>&middot;</h3>
-              <h3 className="rating">{`${movie.rating * 10}% User Score`}</h3>
-            </div>
+            { showDateAndRating() }
             <h3 className="length">{runtimeValue}</h3>
           </div>
         </div>

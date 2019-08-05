@@ -12,6 +12,15 @@
   padding-left: 375px;
 }
 
+.searchFailure {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.searchFailure h2 {
+  margin-top: 20px;
+}
+
 @media (min-width: 900px) {
   .moviesList {
     grid-template-columns: repeat(3, 1fr);
