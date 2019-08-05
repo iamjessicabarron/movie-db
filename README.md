@@ -1,6 +1,8 @@
 # Movie DB
 A React/TypeScript app for browsing popular movies and TV shows.
 
+https://movie-jb.herokuapp.com
+
 ## Getting started
 Create a `.env.local` file with your MovieDB API key `REACT_APP_API_KEY=<your api key here>` 
 
