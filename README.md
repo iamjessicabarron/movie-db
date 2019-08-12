@@ -13,7 +13,7 @@ You will also see any lint errors in the console.
 
 ## Notes on development
 
-I avoided using redux and react-router because it's such a small project
+I avoided using redux and react-router because it's such a small project, however in hindsight I would have used react-router as navigation on some mobile devices was lacking.
 
 Had to choose how to handle search (used same, familiar pattern as Netflix). I'd improve it by adding some kind of delay logic, to only search when the user has finished typing
 
